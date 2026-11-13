@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101c35">
+  <title>Akademia Educare | Learn Practice Improve</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f5fa;
+      color: #17233c;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #101c35;
+      color: white;
+      padding: 22px 16px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 27px;
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      color: #ffb8b8;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-top: 5px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      padding: 13px 8px;
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      box-shadow: 0 2px 8px #0001;
+    }
+
+    nav a {
+      color: #17233c;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 7px;
+    }
+
+    .container {
+      max-width: 750px;
+      margin: 22px auto;
+      padding: 0 14px;
+    }
+
+    .welcome {
+      background: linear-gradient(135deg, #172c50, #334f80);
+      color: white;
+      padding: 28px 20px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+
+    .welcome h2 {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    .welcome p {
+      color: #e2eaff;
+    }
+
+    .section-title {
+      margin: 24px 0 12px;
+      font-size: 21px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 13px;
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 12px #17233c0d;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e9efff;
+      color: #294c91;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin-bottom: 9px;
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #58647a;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: #234b91;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 5px 5px 5px 0;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background: #172f61;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccd3e0;
+      border-radius: 8px;
+      margin: 7px 0 12px;
+      font: inherit;
+      background: white;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .comment-list {
+      font-size: 13px;
+      color: #45536b;
+      margin-top: 10px;
+    }
+
+    .subject-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .subject {
+      background: #e9efff;
+      color: #234b91;
+      padding: 10px 13px;
+      border-radius: 9px;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      background: #101c35;
+      color: white;
+      padding: 23px 12px;
+      margin-top: 35px;
+      font-size: 13px;
+    }
+
+    footer span {
+      color: #ffb8b8;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Akademia Educare</h1>
+  <p>LEARN • PRACTICE • IMPROVE</p>
+</header>
+
+<nav>
+  <a href="#home">Home</a>
+  <a href="#feed">Feed</a>
+  <a href="#subjects">Subjects</a>
+  <a href="#create">Create Post</a>
+  <a href="#ai">AI Ask</a>
+</nav>
+
+<main class="container">
+
+  <section class="welcome" id="home">
+    <h2>Welcome to Akademia Educare!</h2>
+    <p>Learn something new. Share your knowledge.
+       Grow together with a community of learners.</p>
+  </section>
+
+  <section id="subjects">
+    <h2 class="section-title">Explore Subjects</h2>
+    <div class="card">
+      <div class="subject-list">
+        <span class="subject">Physics</span>
+        <span class="subject">Chemistry</span>
+        <span class="subject">Biology</span>
+        <span class="subject">Mathematics</span>
+        <span class="subject">Computer Science</span>
+        <span class="subject">Artificial Intelligence</span>
+        <span class="subject">English</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="feed">
+    <h2 class="section-title">Learning Community Feed</h2>
+
+    <div id="posts">
+
+      <article class="card">
+        <span class="tag">Physics</span>
+        <h3>Can sound create shapes?</h3>
+        <p>Sound vibrations can make sand form beautiful
+           patterns on a vibrating metal plate.
+           This is called the Chladni experiment.</p>
+        <button onclick="likePost(this)">♡ Like (0)</button>
+        <button onclick="addComment(this)">Comment</button>
+        <div class="comment-list"></div>
+      </article>
+
+      <article class="card">
+        <span class="tag">Biology</span>
+        <h3>How do cells produce energy?</h3>
+        <p>Mitochondria help cells release usable energy
+           from food through cellular respiration.</p>
+        <button onclick="likePost(this)">♡ Like (0)</button>
+        <button onclick="addComment(this)">Comment</button>
+        <div class="comment-list"></div>
+      </article>
+
+      <article class="card">
+        <span class="tag">Computer Science</span>
+        <h3>How does the internet work?</h3>
+        <p>Data travels between devices through networks
+           using communication protocols.</p>
+        <button onclick="likePost(this)">♡ Like (0)</button>
+        <button onclick="addComment(this)">Comment</button>
+        <div class="comment-list"></div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="create">
+    <h2 class="section-title">Create Your Post</h2>
+    <div class="card">
+      <label for="category">Choose a subject</label>
+      <select id="category">
+        <option>Physics</option>
+        <option>Chemistry</option>
+        <option>Biology</option>
+        <option>Mathematics</option>
+        <option>Computer Science</option>
+        <option>Artificial Intelligence</option>
+        <option>English</option>
+      </select>
+
+      <label for="postTitle">Post title</label>
+      <input id="postTitle" placeholder="Enter your learning topic">
+
+      <label for="postText">Your content</label>
+      <textarea id="postText"
+        placeholder="Share something educational..."></textarea>
+
+      <button onclick="createPost()">Publish Post</button>
+    </div>
+  </section>
+
+  <section id="ai">
+    <h2 class="section-title">AI Ask</h2>
+    <div class="card">
+      <p>Have a question? Try our sample AI learning assistant.</p>
+      <input id="question" placeholder="Ask an educational question">
+      <button onclick="askAI()">Ask Question</button>
+      <p id="answer" aria-live="polite"></p>
+      <small>Demo only: this is not connected to a real AI service yet.</small>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <h3>Akademia Educare</h3>
+  <p><span>LEARN • PRACTICE • IMPROVE</span></p>
+  <p>Learning today, leading tomorrow.</p>
+  <p>© 2026 Akademia Educare</p>
+</footer>
+
+<script>
+  function likePost(button) {
+    let count = Number(button.dataset.count || 0);
+
+    if (button.dataset.liked === "yes") {
+      count--;
+      button.dataset.liked = "no";
+      button.innerText = "♡ Like (" + count + ")";
+    } else {
+      count++;
+      button.dataset.liked = "yes";
+      button.innerText = "♥ Liked (" + count + ")";
+    }
+
+    button.dataset.count = count;
+  }
+
+  function addComment(button) {
+    let comment = prompt("Write your comment:");
+
+    if (comment && comment.trim()) {
+      let area = button.parentElement.querySelector(".comment-list");
+      let item = document.createElement("p");
+      item.textContent = "💬 " + comment.trim();
+      area.appendChild(item);
+    }
+  }
+
+  function createPost() {
+    let category = document.getElementById("category").value;
+    let title = document.getElementById("postTitle").value.trim();
+    let content = document.getElementById("postText").value.trim();
+
+    if (!title || !content) {
+      alert("Please enter both a title and content.");
+      return;
+    }
+
+    let post = document.createElement("article");
+    post.className = "card";
+
+    let tag = document.createElement("span");
+    tag.className = "tag";
+    tag.textContent = category;
+
+    let heading = document.createElement("h3");
+    heading.textContent = title;
+
+    let paragraph = document.createElement("p");
+    paragraph.textContent = content;
+
+    let like = document.createElement("button");
+    like.textContent = "♡ Like (0)";
+    like.onclick = function() {
+      likePost(like);
+    };
+
+    let comment = document.createElement("button");
+    comment.textContent = "Comment";
+    comment.onclick = function() {
+      addComment(comment);
+    };
+
+    let comments = document.createElement("div");
+    comments.className = "comment-list";
+
+    post.append(tag, heading, paragraph, like, comment, comments);
+    document.getElementById("posts").prepend(post);
+
+    document.getElementById("postTitle").value = "";
+    document.getElementById("postText").value = "";
+
+    alert("Your post has been added to this demo feed!");
+  }
+
+  function askAI() {
+    let question = document.getElementById("question").value.trim();
+    let answer = document.getElementById("answer");
+
+    if (!question) {
+      answer.textContent = "Please type a question first.";
+      return;
+    }
+
+    answer.textContent =
+      "This is a demo assistant. A real AI answer system " +
+      "will be connected in a later development lesson.";
+  }
+</script>
+
+</body>
+</html>
