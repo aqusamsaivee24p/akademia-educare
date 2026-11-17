@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akademia Educare | Quiz Arena</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f4fa;
+  color: #17233b;
+}
+
+header {
+  background: #101d3b;
+  color: white;
+  padding: 22px 15px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  color: #ffffff;
+}
+
+header p {
+  margin-bottom: 0;
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+.container {
+  max-width: 650px;
+  margin: 25px auto;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 3px 14px #00000012;
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+select, button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 8px;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+select {
+  border: 1px solid #ccd3df;
+  background: white;
+}
+
+button {
+  border: none;
+  background: #2458bd;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+.option {
+  display: block;
+  background: #f0f4fb;
+  padding: 13px;
+  margin: 10px 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.option input {
+  margin-right: 9px;
+}
+
+.hidden {
+  display: none;
+}
+
+#feedback {
+  margin-top: 15px;
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #667085;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Akademia Educare</h1>
+  <p>LEARN • PRACTICE • IMPROVE</p>
+  <h2>Quiz Arena</h2>
+</header>
+
+<main class="container">
+
+<section class="card" id="setup">
+  <h2 id="heading">Start Your Examination</h2>
+  <p id="intro">Choose your learning preferences.</p>
+
+  <label for="language">Language / भाषा</label>
+  <select id="language">
+    <option value="en">English</option>
+    <option value="hi">हिन्दी</option>
+  </select>
+
+  <label for="board">Education Board</label>
+  <select id="board">
+    <option>NCERT</option>
+    <option>CBSE</option>
+    <option>UP Board</option>
+  </select>
+
+  <label for="class">Select Class</label>
+  <select id="class">
+    <option>6</option>
+    <option>7</option>
+    <option>8</option>
+    <option>9</option>
+    <option>10</option>
+    <option>11</option>
+    <option>12</option>
+  </select>
+
+  <label for="subject">Select Subject</label>
+  <select id="subject">
+    <option value="Science">Science / विज्ञान</option>
+    <option value="Mathematics">Mathematics / गणित</option>
+  </select>
+
+  <button onclick="startQuiz()">Start Quiz</button>
+</section>
+
+<section class="card hidden" id="quiz">
+  <p id="details"></p>
+  <h3 id="question"></h3>
+  <div id="options"></div>
+  <button id="next" onclick="nextQuestion()" disabled>
+    Next Question
+  </button>
+  <p id="feedback"></p>
+</section>
+
+<section class="card hidden" id="result">
+  <h2 id="resultTitle">Examination Result</h2>
+  <h1 id="score"></h1>
+  <p id="summary"></p>
+  <button onclick="location.reload()">Try Again</button>
+</section>
+
+</main>
+
+<footer>
+  Akademia Educare | LEARN • PRACTICE • IMPROVE
+</footer>
+
+<script>
+const questions = {
+  en: [
+    {
+      q: "Which organelle is called the powerhouse of the cell?",
+      options: ["Nucleus", "Mitochondria", "Ribosome", "Golgi body"],
+      answer: 1,
+      explanation: "Mitochondria produce most of the ATP used by cells."
+    },
+    {
+      q: "What is the chemical formula of water?",
+      options: ["CO2", "O2", "H2O", "NaCl"],
+      answer: 2,
+      explanation: "A water molecule contains two hydrogen atoms and one oxygen atom."
+    },
+    {
+      q: "Which force pulls objects towards Earth?",
+      options: ["Magnetic force", "Friction", "Gravity", "Electric force"],
+      answer: 2,
+      explanation: "Gravity attracts objects towards the Earth."
+    }
+  ],
+  hi: [
+    {
+      q: "कोशिका का ऊर्जा गृह किस अंगक को कहा जाता है?",
+      options: ["केंद्रक", "माइटोकॉन्ड्रिया", "राइबोसोम", "गॉल्जी बॉडी"],
+      answer: 1,
+      explanation: "माइटोकॉन्ड्रिया कोशिका के लिए अधिकांश ATP बनाते हैं।"
+    },
+    {
+      q: "पानी का रासायनिक सूत्र क्या है?",
+      options: ["CO2", "O2", "H2O", "NaCl"],
+      answer: 2,
+      explanation: "पानी के एक अणु में दो हाइड्रोजन और एक ऑक्सीजन परमाणु होता है।"
+    },
+    {
+      q: "कौन-सा बल वस्तुओं को पृथ्वी की ओर खींचता है?",
+      options: ["चुंबकीय बल", "घर्षण", "गुरुत्वाकर्षण", "विद्युत बल"],
+      answer: 2,
+      explanation: "गुरुत्वाकर्षण वस्तुओं को पृथ्वी की ओर आकर्षित करता है।"
+    }
+  ]
+};
+
+let current = 0;
+let marks = 0;
+let selected = null;
+let language = "en";
+let quizQuestions = [];
+
+function startQuiz() {
+  language = document.getElementById("language").value;
+  quizQuestions = questions[language];
+
+  current = 0;
+  marks = 0;
+
+  document.getElementById("setup").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+
+  showQuestion();
+}
+
+function showQuestion() {
+  selected = null;
+
+  const q = quizQuestions[current];
+
+  document.getElementById("details").textContent =
+    "Question " + (current + 1) + " of " + quizQuestions.length;
+
+  document.getElementById("question").textContent = q.q;
+
+  document.getElementById("options").innerHTML = "";
+
+  document.getElementById("feedback").textContent = "";
+
+  document.getElementById("next").disabled = true;
+
+  q.options.forEach((option, index) => {
+    const label = document.createElement("label");
+    label.className = "option";
+
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "answer";
+    radio.value = index;
+
+    radio.addEventListener("change", () => {
+      selected = index;
+      document.getElementById("next").disabled = false;
+    });
+
+    label.appendChild(radio);
+    label.appendChild(document.createTextNode(option));
+
+    document.getElementById("options").appendChild(label);
+  });
+}
+
+function nextQuestion() {
+  if (selected === null) return;
+
+  const q = quizQuestions[current];
+  const feedback = document.getElementById("feedback");
+
+  if (selected === q.answer) {
+    marks++;
+    feedback.textContent = "Correct! " + q.explanation;
+    feedback.style.color = "green";
+  } else {
+    feedback.textContent =
+      "Incorrect. Correct answer: " +
+      q.options[q.answer] + ". " + q.explanation;
+    feedback.style.color = "red";
+  }
+
+  document.getElementById("next").disabled = true;
+
+  current++;
+
+  if (current < quizQuestions.length) {
+    setTimeout(showQuestion, 1600);
+  } else {
+    setTimeout(showResult, 1600);
+  }
+}
+
+function showResult() {
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  document.getElementById("score").textContent =
+    marks + " / " + quizQuestions.length;
+
+  document.getElementById("summary").textContent =
+    "Correct answers: " + marks +
+    " | Incorrect answers: " +
+    (quizQuestions.length - marks);
+}
+</script>
+
+</body>
+</html>
